@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ClimaService } from 'src/app/servicio/clima.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+  ciudad = "";
+  temperatura = 0;
+  //humedad
+
+  constructor(private climaService: ClimaService) {}
+
+  mClima() {
+    this.climaService.clima(this.ciudad).subscribe( data => {
+      this.temperatura = data.main.temp;
+    })
+  }
 }
